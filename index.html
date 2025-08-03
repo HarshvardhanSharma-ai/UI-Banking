@@ -2,121 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bank UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amount</title>
+
   <style>
-    body {
-      background: #0b1d3a;
-      font-family: Arial, sans-serif;
-      color: #fff;
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 100vh;
+      width: 100vw;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      background-color: rgb(3, 3, 55);
     }
-    .container {
-      background: #122b4d;
+
+    .box {
+      height: 30%;
+      width: 35%;
       padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
+      box-shadow: 0 0 10px rgba(2, 8, 91, 0.697);
+      background-color: rgb(9, 18, 88);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+     
     }
-    .balance {
-      font-size: 24px;
-      margin-bottom: 15px;
-      color: #00e676;
+
+    .Amount {
+      color: rgb(24, 129, 24);
+      font-size: 30px;
+      font-weight: 600;
     }
-    input {
+
+    .Deposit {
+      height: 40px;
       width: 90%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    button {
-      width: 45%;
-      padding: 10px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
+      background-color: green;
+      border-radius: 10px;
       color: white;
-      cursor: pointer;
-      font-size: 16px;
+      font-size: 20px;
+      font-weight: 500;
+      border: none;
     }
-    .deposit { background: #2ecc71; }
-    .withdraw { background: #e74c3c; }
-    .message {
-      margin-top: 10px;
-      font-weight: bold;
-      min-height: 20px;
+
+    .Withdraw {
+      height: 40px;
+      width: 90%;
+      background-color: red;
+      border-radius: 10px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      border: none;
     }
-    .history {
-      margin-top: 20px;
-      font-size: 14px;
-      text-align: left;
-      max-height: 100px;
-      overflow-y: auto;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
-    }
+
+
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>My Bank</h2>
-    <div class="balance" id="balance">₹0</div>
-    <input type="number" id="amount" placeholder="Enter amount" />
-    <div>
-      <button class="deposit" onclick="deposit()">Deposit</button>
-      <button class="withdraw" onclick="withdraw()">Withdraw</button>
+    <div class="box">
+      <p class="Amount">$0</p>
+      <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="1" step="1" required
+       style="width: 90%; padding: 10px; font-size: 18px; border-radius: 10px; border: 1px solid #ccc; font-family: 'Segoe UI', sans-serif; -moz-appearance: textfield;" />
+
+      <button class="Deposit">Deposit</button>
+      <button class="Withdraw">Withdraw</button>
     </div>
-    <div class="message" id="message"></div>
-    <div class="history" id="history"><strong>Transaction History:</strong><br></div>
   </div>
-
-  <script>
-    let balance = 0;
-
-    function updateBalance() {
-      document.getElementById("balance").innerText = `₹${balance}`;
-    }
-
-    function deposit() {
-      const amount = parseFloat(document.getElementById("amount").value);
-      if (!isNaN(amount) && amount > 0) {
-        balance += amount;
-        updateBalance();
-        document.getElementById("message").innerText = "✅ Deposit successful";
-        addToHistory(`+ ₹${amount} Deposited`);
-      } else {
-        document.getElementById("message").innerText = "Enter a valid amount";
-      }
-      document.getElementById("amount").value = "";
-    }
-
-    function withdraw() {
-      const amount = parseFloat(document.getElementById("amount").value);
-      if (!isNaN(amount) && amount > 0) {
-        if (amount > balance) {
-          document.getElementById("message").innerText = "❌ Insufficient funds!";
-        } else {
-          balance -= amount;
-          updateBalance();
-          document.getElementById("message").innerText = "✅ Withdrawal successful";
-          addToHistory(`- ₹${amount} Withdrawn`);
-        }
-      } else {
-        document.getElementById("message").innerText = "Enter a valid amount";
-      }
-      document.getElementById("amount").value = "";
-    }
-
-    function addToHistory(text) {
-      const entry = document.createElement("div");
-      entry.textContent = text;
-      document.getElementById("history").appendChild(entry);
-    }
-  </script>
 </body>
 </html>
